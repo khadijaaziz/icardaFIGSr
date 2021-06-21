@@ -1,0 +1,20 @@
+Package: icardaFIGSr
+Type: Package
+Title: Subsetting using Focused Identification of the Germplasm
+        Strategy (FIGS)
+Version: 1.0.1
+Author: Khadija Aouzal, Khadija Aziz, Zainab Azough, Amal Ibnelhobyb, Zakaria Kehel, Fawzy Nawar, Bancy Ngatia  
+Maintainer: Khadija Aziz <khadija.aziz.10@gmail.com>
+Description: Running Focused Identification of the Germplasm Strategy (FIGS) to make best subsets from Genebank Collection.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: caret, dplyr, e1071, getPass, ggplot2, gWidgets,foreach,doParallel,
+        gWidgetstcltk, httr, magrittr, methods, nnet, plotROC, plyr,
+        randomForest, raster, readr, reshape2, rworldmap, stats, sp,
+        utils
+RoxygenNote: 7.1.1
+Suggests:
+NeedsCompilation: no
+Packaged: 
+Depends: R (>= 3.5.0)
