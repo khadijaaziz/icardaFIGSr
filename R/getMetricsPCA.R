@@ -9,7 +9,6 @@
 #' @details Works with target variables that have two, three, four, six or eight classes. Similar to \code{\link[icardaFIGSr]{getMetrics}} but used in the case where models have been run with PCA specified as an option for the \code{preProcess} argument in the \code{train} function of \code{caret}.
 #' @author Khadija Aziz, Zainab Azough, Zakaria Kehel, Bancy Ngatia
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Obtain predictions from several previously run models
 #'  dataX <- subset(data, select = -y)
@@ -29,7 +28,6 @@
 #'  # No indexing needed for 3-, 4-, 6- or 8-class models
 #'  metrics.all <- cbind(metrics.knn, metrics.rf)
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[caret]{confusionMatrix}},
 #'  \code{\link[caret]{predict.train}}

@@ -14,11 +14,9 @@ data(septoriaDurumWC)
 A sample data including daily data for 4 climatic variables (tmin, tmax, precipitation and relative humidity) and evaluation for Septoria Tritici
 }
 \examples{
-\dontrun{
 if(interactive()){
  #Load durum wheat data with septoria scores and climatic variables obtained from WorldClim database
  data(septoriaDurumWC)
- }
 }
 }
 \keyword{datasets}

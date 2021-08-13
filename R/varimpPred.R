@@ -31,7 +31,6 @@
 #' For regression models with \code{predict = TRUE}, predictions and residuals versus predicted plot are given.
 #' @author Zakaria Kehel, Bancy Ngatia, Khadija Aziz, Zainab Azough
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Calculate variable importance for classification model
 #'  data("septoriaDurumWC")
@@ -56,7 +55,6 @@
 #'                           ROC = TRUE, predict = TRUE, top = 20)
 #'  svm.varimp
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[caret]{varImp}},
 #'  \code{\link[caret]{predict.train}},
@@ -77,7 +75,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
   if(is.factor(yvec)) {
     if(predict & auc) {
       varimp = caret::varImp(model, scale = scale, ...)
-      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
       varimp.mod$VariableName = rownames(varimp.mod)
       colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
       varimp.mod = varimp.mod[ , -4]
@@ -97,7 +95,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
 
     else if(!predict & auc) {
       varimp = caret::varImp(model, scale = scale, ...)
-      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
     varimp.mod$VariableName = rownames(varimp.mod)
       colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
       varimp.mod = varimp.mod[ , -4]
@@ -113,7 +111,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
 
     else if(predict & !auc) {
       varimp = caret::varImp(model, scale = scale, ...)
-      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
       varimp.mod$VariableName = rownames(varimp.mod)
       colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
       varimp.mod = varimp.mod[ , -4]
@@ -129,7 +127,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
 
     else if(!predict & !auc) {
       varimp = caret::varImp(model, scale = scale, ...)
-      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+      varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
       varimp.mod$VariableName = rownames(varimp.mod)
       colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
       varimp.mod = varimp.mod[ , -4]
@@ -141,7 +139,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
 
   else if(is.numeric(yvec) & predict) {
     varimp = caret::varImp(model, scale = scale, ...)
-    varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+    varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
     varimp.mod$VariableName = rownames(varimp.mod)
     colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
     varimp.mod = varimp.mod[ , -4]
@@ -156,7 +154,7 @@ varimpPred <- function(newdata, y, positive, model, scale = FALSE, auc = FALSE, 
 
   else if(is.numeric(yvec) & !predict) {
     varimp = caret::varImp(model, scale = scale, ...)
-    varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = T))
+    varimp.mod = data.frame(rownames(varimp$importance), matrix(unlist(varimp$importance), nrow = nrow(varimp$importance), byrow = TRUE))
     varimp.mod$VariableName = rownames(varimp.mod)
     colnames(varimp.mod) = c("Variable", names(varimp$importance)[1], names(varimp$importance)[2])
     varimp.mod = varimp.mod[ , -4]

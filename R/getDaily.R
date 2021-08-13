@@ -14,7 +14,6 @@
 #' For daily data, the function extracts average daily values starting from the first day of the calendar year, i.e. January 1, until the last day of the calendar year, i.e. December 31. Thus, 365 columns with daily values are created for each variable.
 #' @author Zakaria Kehel, Bancy Ngatia
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Extract daily data for durum wheat
 #'  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
@@ -25,7 +24,6 @@
 #'  # returned (when cv = TRUE)
 #'  daily.cv <- daily[[2]]
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[reshape2]{cast}}
 #' @rdname getDaily
@@ -35,11 +33,11 @@
 
 getDaily <- function(sites, var, cv = FALSE) {
   
-  print("Data loading started ....")
+  message("Data loading started ....")
   load(url("https://grs.icarda.org/FIGS/IcardaFigsData.RData"))
-  print("Loading completed!")
+  message("Loading completed!")
 
-  daily.climate.df <<- droplevels(subset(climate.df, climate.df$site_code %in% sites))
+  daily.climate.df <- droplevels(subset(climate.df, climate.df$site_code %in% sites))
   daily.climate.cv.df <- droplevels(subset(climate.cv.df, climate.cv.df$site_code %in% sites))
   daily.climate.df <- daily.climate.df[order(daily.climate.df$site_code), ]
   daily.climate.cv.df <- daily.climate.cv.df[order(daily.climate.cv.df$site_code), ]

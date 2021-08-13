@@ -27,7 +27,6 @@ The function relies on the \code{caret} package to obtain the confusion matrix f
 Predictions have to be obtained beforehand and used as input for \code{yhat}. The \code{predict.train} function in \code{caret} should be run without argument \code{type} when obtaining the predictions.
 }
 \examples{
-\dontrun{
 if(interactive()){
 # Obtain predictions from previous models
  
@@ -44,7 +43,6 @@ pred.nnet <- predict(nnet.mod$Model, newdata = data.test[ , -1])
 
 metrics.knn <- getMetrics(y = data.test$ST_S, yhat = pred.knn, classtype = 2)
 metrics.nnet <- getMetrics(y = data.test$ST_S, yhat = pred.nnet, classtype = 2)
- }
 }
 }
 \seealso{

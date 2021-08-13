@@ -14,11 +14,9 @@ data(durumDaily)
 200 sites from durum wheat collection and their daily climatic data.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Load durum wheat data with their daily climatic variables obtained from ICARDA database
  data(durumDaily)
- }
 }
 }
 \keyword{datasets}

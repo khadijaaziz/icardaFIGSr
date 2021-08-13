@@ -32,7 +32,6 @@ Cumulative GDD values determine the length of different growing stages. Growing 
 The length of the full growth cycle of the crop for each site is also given in the output data frame.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Calculate GDD for durum wheat
  data(durumDaily)
@@ -52,7 +51,6 @@ if(interactive()){
  # variables from list object returned (when gdd = TRUE)
  growth.gdd <- growth[[3]]
  }
-}
 }
 \author{
 Khadija Aouzal, Zakaria Kehel, Bancy Ngatia

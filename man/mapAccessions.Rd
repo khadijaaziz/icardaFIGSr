@@ -2,17 +2,9 @@
 % Please edit documentation in R/mapAccessions.R
 \name{mapAccessions}
 \alias{mapAccessions}
-\title{Plotting Accessions Worldwide or on Specific Countries.}
+\title{Plotting Accessions on Map.}
 \usage{
-mapAccessions(
-  df,
-  long,
-  lat,
-  y = NULL,
-  col = c("red", "green"),
-  country = NULL,
-  ...
-)
+mapAccessions(df, long, lat, y = NULL)
 }
 \arguments{
 \item{df}{object of class "data.frame" with coordinates of accessions and target variable.}
@@ -21,43 +13,31 @@ mapAccessions(
 
 \item{lat}{character. Column name from \code{df} representing latitude.}
 
-\item{y}{Default: NULL, column name from \code{df} representing the target variable. If NULL, the accessions are plotted with a unique colour given in the \code{col} argument.}
-
-\item{col}{Default: c("red","green"), character or vector of two characters representing the colour for plotting.}
-
-\item{country}{Default: NULL, one or vector of ISO 3166-1 alpha-3 country codes. When specified, accessions are plotted on maps of the specified countries. If NULL, the accessions are plotted worldwide.}
-
-\item{...}{additional arguments to be passed to \code{geom_point} function in \code{ggplot2} package to control appearance of points.}
+\item{y}{Default: NULL, column name from \code{df} representing the target variable.}
 }
 \value{
-A world map, or specific countries maps, with plotted points showing locations of accessions. The world map is obtained from package \code{rworldmap}.
+A world map with plotted points showing locations of accessions.
 }
 \description{
 this function returns a map with points showing where accessions are located.
 }
-\details{
-\code{mapAccessions} plots a low resolution world map from the package \code{rworldmap}. Points showing locations of accessions are plotted based on the coordinates obtained from \code{long} and \code{lat}. 
-If \code{y} is numeric, points are coloured using a gradient scale from the colour(s) given in the \code{col} argument. If \code{y} is not numeric, the colour of plotting is defined by factors of \code{y}.
-}
 \examples{
-\dontrun{
 if(interactive()){
  # Loading FIGS subset for wheat sodicity resistance
  data(FIGS)
  # World Map showing locations of accessions
  mapAccessions(df = FIGS, long = "Longitude", lat = "Latitude")
  
- # Map plotting locations of accessions in Morocco and Algeria with points coloured 
+ # Map plotting locations of accessions with points coloured 
  # based on a gradient scale of SodicityIndex values
  mapAccessions(FIGS, long = "Longitude", lat = "Latitude", 
-               y = "SodicityIndex", country = c("MAR","DZA"))
- # Map plotting locations of accessions in Morocco with points
+               y = "SodicityIndex")
+ # Map plotting locations of accessions with points
  # coloured based on levels of y 
  mapAccessions(FIGS, long = "Longitude", lat = "Latitude", 
- y = "PopulationType", country = "MAR")
+ y = "PopulationType")
  }
 }
-}
 \author{
-Khadija Aouzal, Zakaria Kehel, Bancy Ngatia
+Khadija Aouzal, Zakaria Kehel
 }

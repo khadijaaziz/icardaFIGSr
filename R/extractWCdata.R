@@ -10,7 +10,6 @@
 #' The extracted data will most likely contain NA's for sites where climatic data is not available. These should be removed or imputed before using the data to make predictions.
 #' @author Zakaria Kehel, Fawzy Nawar, Bancy Ngatia, Khadija Aouzal
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Create grid
 #'  sp1 <- seq(-16, 115, length = 10)
@@ -21,7 +20,6 @@
 #'  sp.df0 <- extractWCdata(sp, long = 'x', lat = 'y', var = 'tavg')
 #'  sp.df <- na.omit(sp.df0)
 #'  }
-#' }
 #' @rdname extractWCdata
 #' @export
 #' @importFrom sp SpatialPoints
@@ -48,7 +46,7 @@ extractWCdata <- function(sites, long, lat, var, res = 2.5){
       
       f.name <- names(rasterfile)[i]
       var.name <- sub(paste(".*",res,"m_", sep = ''), "", f.name)
-      print(var.name)
+      message(var.name)
       sites[ , var.name] <- raster::extract(rasterfile[[i]], sp, method = 'simple')
       
     }
@@ -104,7 +102,7 @@ extractWCdata <- function(sites, long, lat, var, res = 2.5){
   if (res == 0) {
     w <- getOption('warn')
     on.exit(options('warn' = w))
-    options('warn'=-1) 
+    suppressWarnings()
     if (! file.rename(fn, filename) ) { 
       file.copy(fn, filename)
       file.remove(fn)

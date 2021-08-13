@@ -56,7 +56,6 @@ Crops available in ICARDA's genebank documentation system include the following:
  Alternatively, the list of available crops can be fetched from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Extract onset data for durum wheat
  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
@@ -73,7 +72,6 @@ if(interactive()){
  # Get data frame with phenotypic variables from list object returned
  onset.pheno <- onset[[3]]
  }
-}
 }
 \seealso{
 \code{\link[reshape2]{dcast}},

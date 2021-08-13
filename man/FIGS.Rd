@@ -15,10 +15,8 @@ FIGS subset for wheat sodicity resistance
 constructed using the harmonized world soil database HWSD
 }
 \examples{
-\dontrun{
 if(interactive()){
  data(FIGS)
- }
 }
 }
 \references{

@@ -29,7 +29,6 @@ ICARDA data has to be accessible either from a local directory on the computer o
 For daily data, the function extracts average daily values starting from the first day of the calendar year, i.e. January 1, until the last day of the calendar year, i.e. December 31. Thus, 365 columns with daily values are created for each variable.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Extract daily data for durum wheat
  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
@@ -40,7 +39,6 @@ if(interactive()){
  # returned (when cv = TRUE)
  daily.cv <- daily[[2]]
  }
-}
 }
 \seealso{
 \code{\link[reshape2]{cast}}

@@ -2,15 +2,13 @@
 #' @description 200 sites from durum wheat collection and their world clim data.
 #' @docType data
 #' @usage data(durumWC)
-#' @format The data includes the site unique identifier, longitude, latitude and 55 worldclim data \href{www.worldclim.org}{worldclim}
+#' @format The data includes the site unique identifier, longitude, latitude and 55 worldclim data \href{https://www.worldclim.org}{worldclim}
 #' 
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Load durum wheat data with world climatic variables obtained from WorldClim database
 #'  data(durumWC)
 #'  }
-#' }
 "durumWC"
 
 
@@ -21,11 +19,9 @@
 #' @format The data includes the site unique identifier and daily data for 4 climatic variables (tmin, tmax, precipitation and relative humidity)
 #' 
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Load durum wheat data with their daily climatic variables obtained from ICARDA database
 #'  data(durumDaily)
-#'  }
 #' }
 "durumDaily"
 
@@ -37,11 +33,9 @@
 #' @format 200 sites from durum wheat collection and their daily climatic data and evaluation for Septoria Tritici.
 #' 
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  #Load durum wheat data with septoria scores and climatic variables obtained from WorldClim database
 #'  data(septoriaDurumWC)
-#'  }
 #' }
 "septoriaDurumWC"
 
@@ -62,10 +56,8 @@
 #'
 #'
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  data(FIGS)
-#'  }
 #' }
 
 "FIGS"

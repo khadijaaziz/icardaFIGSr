@@ -40,7 +40,6 @@
 #'  Alternatively, the list of available crops can be fetched from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 #' @author Khadija Aouzal, Amal Ibnelhobyb, Zakaria Kehel, Bancy Ngatia  
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Extract onset data for durum wheat
 #'  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
@@ -57,7 +56,6 @@
 #'  # Get data frame with phenotypic variables from list object returned
 #'  onset.pheno <- onset[[3]]
 #'  }
-#' }
 #' @seealso
 #'  \code{\link[reshape2]{dcast}},
 #'  \code{\link[icardaFIGSr]{getCrops}}
@@ -67,9 +65,9 @@
 
 getOnset <- function(sites, crop, var, cv = FALSE) {
   
-  print("Data loading started ....")
+  message("Data loading started ....")
   load(url("https://grs.icarda.org/FIGS/IcardaFigsData.RData"))
-  print("Loading completed!")
+  message("Loading completed!")
   
   if (crop == 'ICDW'){
     onsetfile = ICDW_Onset_Phen

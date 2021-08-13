@@ -15,7 +15,7 @@ modelingSummary(
   process = c("center", "scale"),
   summary = multiClassSummary,
   positive,
-  parallelComputing = F,
+  parallelComputing = FALSE,
   classtype,
   ...
 )
@@ -59,11 +59,9 @@ modelingSummary is an automatic function for modeling data, it returns a datafra
 Types of classification and regression models available for use with \code{tuneTrain} can be found using \code{names(getModelInfo())}. The results given depend on the type of model used.
 }
 \examples{
-\dontrun{
 if(interactive()){
  data(septoriaDurumWC)
  models <- modelingSummary(data = septoriaDurumWC, y = "ST_S", positive = "R", classtype = 2)
- }
 }
 }
 \seealso{

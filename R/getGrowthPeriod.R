@@ -15,7 +15,6 @@
 #' The length of the full growth cycle of the crop for each site is also given in the output data frame.
 #' @author Khadija Aouzal, Zakaria Kehel, Bancy Ngatia
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Calculate GDD for durum wheat
 #'  data(durumDaily)
@@ -35,7 +34,6 @@
 #'  # variables from list object returned (when gdd = TRUE)
 #'  growth.gdd <- growth[[3]]
 #'  }
-#' }
 #' @rdname getGrowthPeriod
 #' @importFrom dplyr group_by slice
 #' @importFrom magrittr "%>%"

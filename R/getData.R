@@ -1,60 +1,42 @@
-
 .icardaFIGSEnv <- new.env(parent = emptyenv())
 
-#' Getting username and password from the user
-#' @keywords internal
-#' @export
-#' @importFrom gWidgets gbasicdialog
-
-
-# library(tcltk)
-# library(digest)
-# library(gWidgets)
-# 
-# library(gWidgetstcltk)
+#' GUI for getting username and password from user
+#' @return No return value
+#' @import gWidgets2 gWidgets2RGtk2 RGtk2
+#' 
 
 .authenticate <- function(){
-  options(guiToolkit="tcltk")
-  main <- gbasicdialog(title = "Login Window", 
-                       width = 400, 
-                       height = 400,
-                       do.buttons = FALSE)
-  row1 <- ggroup(container = main)
-  lbl_username <- glabel(container = row1, text="Username: ")
-  txt_username <- gedit(container = row1)
+  options(guiToolkit="RGtk2")
   
-  row2 <- ggroup(container = main)
-  lbl_password <- glabel(container = row2, text = "Password: ")
-  txt_password <- gedit(container = row2)
-  visible(txt_password) <- FALSE 
+  w <- gWidgets2::gbasicdialog(title = "Login", width = 400, 
+                               height = 400, do.buttons = FALSE)
+  g1 <- gWidgets2::ggroup(horizontal=FALSE, cont=w)
+  user.group = gWidgets2::ggroup(horizontal=TRUE, container = g1, expand=TRUE)
+  lbl_username <- gWidgets2::glabel(container = user.group, text="Username: ")
+  txt_username <- gWidgets2::gedit(cont = user.group)
+
+  pwd.group = gWidgets2::ggroup(horizontal=TRUE, container = g1, expand=TRUE)
+  lbl_password <- gWidgets2::glabel(container = pwd.group, text = "Password: ")
+  txt_password <- gWidgets2::gedit(cont = pwd.group)
+  gWidgets2::visible(txt_password) <- FALSE
   
-  row3 <- ggroup(container = main) 
   
-  btn_login <- gbutton(container = row3,  text = "Login")
+  btn.group = gWidgets2::ggroup(horizontal=TRUE, container = g1, expand=TRUE)
+  btn_login <- gWidgets2::gbutton(container = btn.group,  text = "Login")
   
-  # Event handler for login button
-  do_login <- function(obj){ 
-    
-    username <- svalue(txt_username)
-    password <- svalue(txt_password)
+  gWidgets2::addHandlerClicked(btn_login, function(h,...) {
+  
+    username <- gWidgets2::svalue(txt_username)
+    password <- gWidgets2::svalue(txt_password)
+  
     .credentials <- list("username" = username, "password" = password)
     assign(".credentials", .credentials, envir = .icardaFIGSEnv)
-    dispose(main)
-  } 
+
+    gWidgets2::dispose(w)
+   })
   
-  # Registering Events 
-  addHandlerClicked(btn_login, do_login)
+  gWidgets2::visible(w) <- TRUE
   
-  visible(main, TRUE)
-  if(exists(".credentials", envir = .icardaFIGSEnv)){
-    .credentials <- get(".credentials", envir = .icardaFIGSEnv)
-  }
-  else{
-    print("Please enter username and password")
-  }
-  
-  
-  invisible(.credentials)
 }
 
 
@@ -98,12 +80,10 @@
 #'  Alternatively, the list of available crops can be fetched from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 #' @author Khadija Aouzal, Amal Ibnelhobyb, Zakaria Kehel, Fawzy Nawar
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Obtain accession data for durum wheat
 #'  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
 #'  }
-#' }
 #' @rdname getAccessions
 #' @export
 #' @importFrom httr handle POST content
@@ -138,16 +118,16 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
   res = "error"
   if(query != "") {
     
-    if (".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T)) {
-      credentials <- get(".credentials", envir = .icardaFIGSEnv)
-    } else {
-      credentials <- .authenticate()
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
+      .authenticate()
     }
+      
+    credentials <- get(".credentials", envir = .icardaFIGSEnv)
     
     username <- credentials$username
     password <- credentials$password
     
-    handle <- handle("https://grs.icarda.org/web_services/accessionsToR.php")
+    handle <- httr::handle("https://grs.icarda.org/web_services/accessionsToR.php")
     
     body <- list(
       user = username
@@ -161,11 +141,11 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
       ,available = available
     )
     
-    response <- POST(handle = handle, body = body)
-    res <- content(response, type = "text/csv")
+    response <- httr::POST(handle = handle, body = body)
+    res <- httr::content(response, type = "text/csv")
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
     
@@ -209,11 +189,9 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
 #'  A list of available crops to use as input for \code{crop} can also be obtained from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 #' @author Khadija Aouzal, Amal Ibnelhobyb, Zakaria Kehel, Fawzy Nawar
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Get traits for bread wheat
 #'  breadTraits <- getTraits(crop = 'Bread wheat')
-#'  }
 #' }
 #' @rdname getTraits
 #' @export
@@ -222,20 +200,20 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
 getTraits <- function(crop) {
   
   if (missing(crop)) {
-    print("Please specify a crop from the list below:")
+    message("Please specify a crop from the list below:")
     return(getCrops())
   } else {
     
     
-    if (".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T)) {
-      credentials <- get(".credentials", envir = .icardaFIGSEnv)
-    } else {
-      credentials <- .authenticate()
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
+      .authenticate()
     }
+      
+    credentials <- get(".credentials", envir = .icardaFIGSEnv)
     
     username <- credentials$username
     password <- credentials$password
-    handle <- handle("https://grs.icarda.org/web_services/getTraits.php")
+    handle <- httr::handle("https://grs.icarda.org/web_services/getTraits.php")
     
     body <- list(
       user = username
@@ -243,12 +221,12 @@ getTraits <- function(crop) {
       ,crop = crop
     )
     
-    response <- POST(handle = handle, body = body)
-    result <- content(response, type = "text/csv")
+    response <- httr::POST(handle = handle, body = body)
+    result <- httr::content(response, type = "text/csv")
     
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
     
@@ -265,13 +243,11 @@ getTraits <- function(crop) {
 #' @details Possible inputs for \code{traitID} can be found using the \code{\link[icardaFIGSr]{getTraits}} function (see section 'Examples').
 #' @author Khadija Aouzal, Amal Ibnelhobyb, Zakaria Kehel, Fawzy Nawar
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Check trait ID for septoria and get septoria data for durum wheat
 #'  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
 #'  durumTraits <- getTraits(crop = 'Durum wheat')
 #'  septoria <- getTraitsData(IG = durum$IG, traitID = 145)
-#'  }
 #' }
 #' @rdname getTraitsData
 #' @export
@@ -281,19 +257,19 @@ getTraitsData <- function(IG, traitID) {
   
   IG = paste(IG, collapse = ',')
   if(traitID == "") {
-    print("Error: Please provide a valid traitID")
+    message("Error: Please provide a valid traitID")
     result = NULL
   } else {
     
-    if (".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T)) {
-      credentials <- get(".credentials", envir = .icardaFIGSEnv)
-    } else {
-      credentials <- .authenticate()
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
+      .authenticate()
     }
+    
+    credentials <- get(".credentials", envir = .icardaFIGSEnv)
     
     username <- credentials$username
     password <- credentials$password
-    handle <- handle("https://grs.icarda.org/web_services/getTraitsData.php")
+    handle <- httr::handle("https://grs.icarda.org/web_services/getTraitsData.php")
     
     body <- list(
       user = username
@@ -302,11 +278,11 @@ getTraitsData <- function(IG, traitID) {
       ,IGs = IG
     )
     
-    response <- POST(handle = handle, body = body)
-    result <- content(response, type = "text/csv", col_types = "nnncnnnnnnnn")
+    response <- httr::POST(handle = handle, body = body)
+    result <- httr::content(response, type = "text/csv", col_types = "nnncnnnnnnnn")
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
   }

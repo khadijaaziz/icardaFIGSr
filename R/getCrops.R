@@ -5,12 +5,10 @@
 #' @details The crop codes and names are fetched from ICARDA's online server.
 #' @author Zakaria Kehel, Fawzy Nawar 
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Get list of available crops
 #'  crops <- getCrops()
 #'  }
-#' }
 #' @rdname getCrops
 #' @export
 #' @importFrom utils read.csv

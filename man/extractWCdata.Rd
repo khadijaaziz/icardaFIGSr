@@ -28,7 +28,6 @@ A grid can be created with any particular coordinates and used as input for \cod
 The extracted data will most likely contain NA's for sites where climatic data is not available. These should be removed or imputed before using the data to make predictions.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Create grid
  sp1 <- seq(-16, 115, length = 10)
@@ -39,7 +38,6 @@ if(interactive()){
  sp.df0 <- extractWCdata(sp, long = 'x', lat = 'y', var = 'tavg')
  sp.df <- na.omit(sp.df0)
  }
-}
 }
 \author{
 Zakaria Kehel, Fawzy Nawar, Bancy Ngatia, Khadija Aouzal

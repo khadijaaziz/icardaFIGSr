@@ -60,7 +60,6 @@ For classification models with \code{predict = TRUE}, class probabilities and RO
 For regression models with \code{predict = TRUE}, predictions and residuals versus predicted plot are given.
 }
 \examples{
-\dontrun{
 if(interactive()){
  # Calculate variable importance for classification model
  data("septoriaDurumWC")
@@ -85,7 +84,6 @@ if(interactive()){
                           ROC = TRUE, predict = TRUE, top = 20)
  svm.varimp
  }
-}
 }
 \seealso{
 \code{\link[caret]{varImp}},

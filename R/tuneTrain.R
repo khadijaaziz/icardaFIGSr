@@ -27,14 +27,12 @@
 #'
 #' @author Zakaria Kehel, Bancy Ngatia, Khadija Aziz
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  data(septoriaDurumWC)
 #'  knn.mod <- tuneTrain(data = septoriaDurumWC,y = 'ST_S',method = 'knn',positive = 'R')
 #'  
 #'  nnet.mod <- tuneTrain(data = septoriaDurumWC,y = 'ST_S',method = 'nnet',positive = 'R')
 #'
-#'  }
 #' }
 #' @seealso
 #'  \code{\link[caret]{createDataPartition}},
@@ -55,7 +53,7 @@
 #' @importFrom doParallel registerDoParallel
 
 
-tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
+tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FALSE,
                         length = 10, control = "repeatedcv", number = 10, 
                         repeats = 10, process = c('center', 'scale'),
                         summary= multiClassSummary,positive, ...) 
@@ -77,7 +75,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
     
     requireNamespace("caret")
 
-    if (parallelComputing == T) {
+    if (parallelComputing == TRUE) {
         cores <- parallel::detectCores()
         cls <- parallel::makeCluster(cores - 4)
         doParallel::registerDoParallel(cls)
@@ -89,13 +87,13 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, preProcess = process , ...)
         train.mod <- tune.mod
-        print(tune.mod)
+        message(tune.mod)
     }
     else if (method == "nnet") {
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, 
                                 preProcess = process, trace = FALSE)
-        print(tune.mod)
+        message(tune.mod)
         size <- tune.mod[["bestTune"]][["size"]]
         
         if (size - 1 <= 0) {
@@ -117,12 +115,12 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
         train.mod = caret::train(trainx, trainy, method, 
                                  tuneGrid = tuneGrid, tuneLength = length, trControl = ctrl2, 
                                  preProcess = process, trace = FALSE, ...)
-        print(train.mod)
+        message(train.mod)
     }
     else {
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, preProcess = process)
-        print(tune.mod)
+        message(tune.mod)
         
         if (method == "knn") {
             k <- tune.mod[["bestTune"]][["k"]]
@@ -172,9 +170,9 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
         train.mod = caret::train(trainx, trainy, method, 
                                  tuneGrid = tuneGrid, tuneLength = length, trControl = ctrl2, 
                                  preProcess = process, ...)
-        print(train.mod)
+        message(train.mod)
     }
-    if (parallelComputing == T) {
+    if (parallelComputing == TRUE) {
         parallel::stopCluster(cls)
         foreach::registerDoSEQ()
         
@@ -182,7 +180,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
     
     if (is.factor(data[[y]])) {
         if (missing(positive)) {
-            warning("The positive class is not defined!", immediate. = TRUE, noBreaks. = T)
+            warning("The positive class is not defined!", immediate. = TRUE, noBreaks. = TRUE)
             positive <- readline(prompt="Please define the positive class for the target variable: ")
         }
         prob.mod = as.data.frame(caret::predict.train(train.mod,testx, type = "prob"))
@@ -218,7 +216,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
     }
     else if (is.numeric(data[[y]])) {
         if (missing(positive)) {
-            warning("The positive class is not defined!", immediate. = TRUE, noBreaks. = T)
+            warning("The positive class is not defined!", immediate. = TRUE, noBreaks. = TRUE)
             positive <- readline(prompt="Please define the positive class for the target variable: ")
         }
         resids = resid(train.mod)
@@ -236,7 +234,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
                  Model = train.mod, 
                  Predictions = pred.mod, 
                  `Residuals Vs. Predicted Plot` = respred.plot2, 
-                 `TrainingIndex`=Train_Index,
+                 `TrainingIndex`= Train_Index,
                  `Training Data` = trainset, 
                  `Test Data` = testset)
         return(x)

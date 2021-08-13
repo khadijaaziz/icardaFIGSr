@@ -14,7 +14,6 @@
 #' If \code{y} is numeric, the data is split into groups based on percentiles and the sampling done within these subgroups. See \code{\link[caret]{createDataPartition}} for more details on additional arguments that can be passed.
 #' @author Zakaria Kehel, Bancy Ngatia
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  # Split the data into 70/30 train and test sets for factor y
 #'  data(septoriaDurumWC)
@@ -24,7 +23,6 @@
 #'  # Get training and test sets from list object returned
 #'  trainset <- split.data$trainset
 #'  testset <- split.data$testset
-#'  }
 #' }
 #' @seealso
 #'  \code{\link[caret]{createDataPartition}}

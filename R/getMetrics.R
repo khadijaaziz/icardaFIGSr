@@ -12,7 +12,6 @@
 #' Predictions have to be obtained beforehand and used as input for \code{yhat}. The \code{predict.train} function in \code{caret} should be run without argument \code{type} when obtaining the predictions.
 #' @author Zakaria Kehel, Bancy Ngatia, Khadija Aziz
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'# Obtain predictions from previous models
 #'  
@@ -29,7 +28,6 @@
 #'
 #'metrics.knn <- getMetrics(y = data.test$ST_S, yhat = pred.knn, classtype = 2)
 #'metrics.nnet <- getMetrics(y = data.test$ST_S, yhat = pred.nnet, classtype = 2)
-#'  }
 #' }
 #' @seealso
 #'  \code{\link[caret]{confusionMatrix}}

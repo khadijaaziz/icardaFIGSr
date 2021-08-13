@@ -21,11 +21,9 @@
 #' 
 #' @author Zakaria Kehel, Khadija Aziz
 #' @examples
-#' \dontrun{
 #' if(interactive()){
 #'  data(septoriaDurumWC)
 #'  models <- modelingSummary(data = septoriaDurumWC, y = "ST_S", positive = "R", classtype = 2)
-#'  }
 #' }
 #' @seealso
 #'  \code{\link[caret]{createDataPartition}},
@@ -42,7 +40,7 @@
 modelingSummary <- function (data, y, p = 0.7, 
                        length = 10, control = "repeatedcv", number = 10, 
                        repeats = 10, process = c('center', 'scale'),
-                       summary= multiClassSummary,positive, parallelComputing = F, 
+                       summary= multiClassSummary,positive, parallelComputing = FALSE, 
                        classtype, ...){
   
   #### Tuning ####

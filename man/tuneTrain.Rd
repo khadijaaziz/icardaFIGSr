@@ -9,7 +9,7 @@ tuneTrain(
   y,
   p = 0.7,
   method = method,
-  parallelComputing = F,
+  parallelComputing = FALSE,
   length = 10,
   control = "repeatedcv",
   number = 10,
@@ -65,14 +65,12 @@ Types of classification and regression models available for use with \code{tuneT
 For classification models, class probabilities and ROC curve are given in the results. For regression models, predictions and residuals versus predicted plot are given. \code{y} should be converted to either factor if performing classification or numeric if performing regression before specifying it in \code{tuneTrain}.
 }
 \examples{
-\dontrun{
 if(interactive()){
  data(septoriaDurumWC)
  knn.mod <- tuneTrain(data = septoriaDurumWC,y = 'ST_S',method = 'knn',positive = 'R')
  
  nnet.mod <- tuneTrain(data = septoriaDurumWC,y = 'ST_S',method = 'nnet',positive = 'R')
 
- }
 }
 }
 \seealso{
