@@ -68,11 +68,11 @@ modelingSummary <- function (data, y, p = 0.7,
   
   
   # Apply metrics function to yhat and y from each model
-  data.knn.metrics <- getMetrics(data.knn.pred, unlist(knn.mod$`Test Data`[1]), classtype = classtype)
-  data.svm.metrics <- getMetrics(data.svm.pred, unlist(svm.mod$`Test Data`[1]), classtype = classtype)
-  data.rf.metrics <- getMetrics(data.rf.pred, unlist(rf.mod$`Test Data`[1]), classtype = classtype)
-  data.nnet.metrics <- getMetrics(data.nnet.pred, unlist(nnet.mod$`Test Data`[1]), classtype = classtype)
-  data.bcart.metrics <- getMetrics(data.bcart.pred, unlist(bcart.mod$`Test Data`[1]), classtype = classtype)
+  data.knn.metrics <- getMetrics(unlist(knn.mod$`Test Data`[1]), data.knn.pred, classtype = classtype)
+  data.svm.metrics <- getMetrics(unlist(svm.mod$`Test Data`[1]), data.svm.pred, classtype = classtype)
+  data.rf.metrics <- getMetrics(unlist(rf.mod$`Test Data`[1]), data.rf.pred, classtype = classtype)
+  data.nnet.metrics <- getMetrics(unlist(nnet.mod$`Test Data`[1]), data.nnet.pred, classtype = classtype)
+  data.bcart.metrics <- getMetrics(unlist(bcart.mod$`Test Data`[1]), data.bcart.pred, classtype = classtype)
   
   metrics.models <- cbind(data.knn.metrics$Metrics, data.svm.metrics$Metrics, data.rf.metrics$Metrics, data.nnet.metrics$Metrics, data.bcart.metrics$Metrics)
   names(metrics.models) <- c("K-NN", "SVM", "RF", "NNET", "BCART")

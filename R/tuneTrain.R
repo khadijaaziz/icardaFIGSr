@@ -87,13 +87,13 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FA
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, preProcess = process , ...)
         train.mod <- tune.mod
-        message(tune.mod)
+        print(tune.mod)
     }
     else if (method == "nnet") {
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, 
                                 preProcess = process, trace = FALSE)
-        message(tune.mod)
+        print(tune.mod)
         size <- tune.mod[["bestTune"]][["size"]]
         
         if (size - 1 <= 0) {
@@ -115,12 +115,12 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FA
         train.mod = caret::train(trainx, trainy, method, 
                                  tuneGrid = tuneGrid, tuneLength = length, trControl = ctrl2, 
                                  preProcess = process, trace = FALSE, ...)
-        message(train.mod)
+        print(train.mod)
     }
     else {
         tune.mod = caret::train(trainx, trainy, method = method, 
                                 tuneLength = length, trControl = ctrl, preProcess = process)
-        message(tune.mod)
+        print(tune.mod)
         
         if (method == "knn") {
             k <- tune.mod[["bestTune"]][["k"]]
@@ -170,7 +170,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FA
         train.mod = caret::train(trainx, trainy, method, 
                                  tuneGrid = tuneGrid, tuneLength = length, trControl = ctrl2, 
                                  preProcess = process, ...)
-        message(train.mod)
+        print(train.mod)
     }
     if (parallelComputing == TRUE) {
         parallel::stopCluster(cls)
