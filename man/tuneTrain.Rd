@@ -9,7 +9,7 @@ tuneTrain(
   y,
   p = 0.7,
   method = method,
-  parallelComputing = FALSE,
+  parallelComputing = F,
   length = 10,
   control = "repeatedcv",
   number = 10,
