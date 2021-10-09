@@ -53,7 +53,7 @@
 #' @importFrom doParallel registerDoParallel
 
 
-tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
+tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FALSE,
                        length = 10, control = "repeatedcv", number = 10, 
                        repeats = 10, process = c('center', 'scale'),
                        summary= multiClassSummary,positive, ...) 
@@ -76,7 +76,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
     require(caret)
     require(doParallel)
     
-    if (parallelComputing == T) {
+    if (parallelComputing == TRUE) {
         cores <- detectCores()
         cls <- makeCluster(cores - 4)
         registerDoParallel(cls)
@@ -173,7 +173,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = F,
                                  preProcess = process, ...)
         
     }
-    if (parallelComputing == T) {
+    if (parallelComputing == TRUE) {
         stopCluster(cls)
         registerDoSEQ()
         
