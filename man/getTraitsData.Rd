@@ -21,11 +21,13 @@ Return a data frame with observed values of accessions for associated Trait
 Possible inputs for \code{traitID} can be found using the \code{\link[icardaFIGSr]{getTraits}} function (see section 'Examples').
 }
 \examples{
+\dontrun{
 if(interactive()){
  # Check trait ID for septoria and get septoria data for durum wheat
  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
  durumTraits <- getTraits(crop = 'Durum wheat')
  septoria <- getTraitsData(IG = durum$IG, traitID = 145)
+ }
 }
 }
 \author{

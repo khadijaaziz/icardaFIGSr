@@ -51,6 +51,7 @@
 #' @importFrom stats resid
 #' @importFrom foreach registerDoSEQ
 #' @importFrom doParallel registerDoParallel
+#' @importFrom parallel detectCores makeCluster stopCluster
 
 
 tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FALSE,
@@ -72,14 +73,11 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FA
     trainy = trainset[[y]]
     testx = testset[colnames(testset) %in% colnames(x)]
     testy = testset[[y]]
-    
-    require(caret)
-    require(doParallel)
-    
+
     if (parallelComputing == TRUE) {
-        cores <- detectCores()
-        cls <- makeCluster(cores - 4)
-        registerDoParallel(cls)
+        cores <- parallel::detectCores()
+        cls <- parallel::makeCluster(cores - 4)
+        doParallel::registerDoParallel(cls)
     }
     ctrl = caret::trainControl(method = control, number = number, 
                                repeats = repeats)
@@ -174,7 +172,7 @@ tuneTrain <- function (data, y, p = 0.7, method = method, parallelComputing = FA
         
     }
     if (parallelComputing == TRUE) {
-        stopCluster(cls)
+        parallel::stopCluster(cls)
         registerDoSEQ()
         
     } 

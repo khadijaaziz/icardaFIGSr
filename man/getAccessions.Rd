@@ -68,10 +68,12 @@ Types of crops available include:
  Alternatively, the list of available crops can be fetched from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 }
 \examples{
+\dontrun{
 if(interactive()){
  # Obtain accession data for durum wheat
  durum <- getAccessions(crop = 'Durum wheat', coor = TRUE)
  }
+}
 }
 \author{
 Khadija Aouzal, Amal Ibnelhobyb, Zakaria Kehel, Fawzy Nawar

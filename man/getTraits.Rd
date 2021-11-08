@@ -47,9 +47,11 @@ Possible inputs for \code{crop} include:
  A list of available crops to use as input for \code{crop} can also be obtained from ICARDA's online server using \code{\link[icardaFIGSr]{getCrops}}.
 }
 \examples{
+\dontrun{
 if(interactive()){
  # Get traits for bread wheat
  breadTraits <- getTraits(crop = 'Bread wheat')
+ }
 }
 }
 \author{

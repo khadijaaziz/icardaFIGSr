@@ -2,7 +2,7 @@ Package: icardaFIGSr
 Type: Package
 Title: Subsetting using Focused Identification of the Germplasm
         Strategy (FIGS)
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
   c(person(given = "Khadija",
            family = "Aziz",
@@ -32,8 +32,8 @@ Description: Running Focused Identification of the Germplasm Strategy (FIGS) to 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: caret, doParallel, dplyr, ggplot2, RGtk2, gWidgets2RGtk2, gWidgets2, 
-         foreach, httr, magrittr, methods, plotROC, plyr, raster, reshape2, sp, leaflet
+Imports: caret, doParallel, dplyr, ggplot2,foreach, httr, magrittr, 
+         methods, plotROC, plyr, raster, reshape2, sp, leaflet
 RoxygenNote: 7.1.1
 Suggests:
 NeedsCompilation: no
