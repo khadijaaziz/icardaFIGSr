@@ -117,7 +117,7 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
   res = "error"
   if(query != "") {
     
-    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T))) {
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
       .authenticate()
     }
       
@@ -144,7 +144,7 @@ getAccessions <- function(crop = "", ori = NULL, IG = "", doi = FALSE, taxon = F
     res <- httr::content(response, type = "text/csv")
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
     
@@ -206,7 +206,7 @@ getTraits <- function(crop) {
   } else {
     
     
-    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T))) {
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
       .authenticate()
     }
       
@@ -227,7 +227,7 @@ getTraits <- function(crop) {
     
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
     
@@ -264,7 +264,7 @@ getTraitsData <- function(IG, traitID) {
     result = NULL
   } else {
     
-    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = T))) {
+    if (!(".credentials" %in% ls(envir = .icardaFIGSEnv, all.names = TRUE))) {
       .authenticate()
     }
     
@@ -285,7 +285,7 @@ getTraitsData <- function(IG, traitID) {
     result <- httr::content(response, type = "text/csv", col_types = "nnncnnnnnnnn")
     pattern = "invalid"
     
-    if(grepl(pattern, response, ignore.case = T)){
+    if(grepl(pattern, response, ignore.case = TRUE)){
       rm(.credentials, envir = .icardaFIGSEnv)
     }
   }
